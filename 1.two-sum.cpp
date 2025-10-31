@@ -6,22 +6,20 @@
 
 // @lc code=start
 #include<vector>
-using namespace std;
+#include<unordered_map>
+using namespace std; 
 class Solution {
 public:
     vector<int> twoSum(vector<int>& nums, int target) {
-        int dif;
-        vector<int> ans;
-        for(int i=0;i<nums.size() ;++i){
-                dif = target-nums[i];
-                for(int j = i+1; j<nums.size();++j){
-                    if(nums[j] == dif){
-                        ans.push_back(i);
-                        ans.push_back(j);
-                    }
-                }
+    unordered_map<int, int> hash;
+    for(int i = 0; i < nums.size() ;++i){
+        int complement = target-nums[i];
+        if(hash.count(complement) == 1){
+            return {hash[complement], i};
         }
-        return ans;
+        hash[nums[i]]=i;
+    }
+    return {};
     }
 };
 // @lc code=end
